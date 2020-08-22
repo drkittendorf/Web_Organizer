@@ -3,7 +3,7 @@ const db = require('../models');
 module.exports = function(app) {
 //* GET route for getting all of the bookmarks
     app.get('/api/bookmark', function(req, res) {
-        
+        console.log(req)
         const testKey = Object.keys(req.sessionStore.sessions)[0]
         const testVals = Object.values(req.sessionStore.sessions)[0]
         const testObj = JSON.parse(testVals);

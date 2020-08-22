@@ -1,4 +1,5 @@
 require('dotenv').config()
+var mysql = require('mysql');
 
 module.exports = {
     development: {
@@ -8,24 +9,13 @@ module.exports = {
       host:     'localhost',
       dialect:  'mysql'
     },
-    test: {
-      username: 'root',
-      password: null,
-      database: 'database_test',
-      host: '127.0.0.1',
-      dialect: 'mysql'
-    },
+    
     production: {
-      username: 'root',
-      password: 'null',
-      database: 'database_production',
-      host: '127.0.0.1',
-      dialect: 'mysql'
+        "use_env_variable": "JAWSDB_URL",
+        "dialect":  "mysql"
   }
 }
 
-
-var mysql = require('mysql');
 
 var connection;
 if (process.env.JAWSDB_URL) {
@@ -42,7 +32,7 @@ if (process.env.JAWSDB_URL) {
     })
 };
 
-var mysql = require('mysql');
+
 
 
 
