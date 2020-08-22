@@ -1,5 +1,5 @@
-require('dotenv').config()
-var mysql = require('mysql');
+// require('dotenv').config()
+// var mysql = require('mysql');
 
 module.exports = {
     development: {
@@ -17,20 +17,20 @@ module.exports = {
 }
 
 
-var connection;
-if (process.env.JAWSDB_URL) {
-    // Database is JawsDB on Heroku
-    connection = mysql.createConnection(process.env.JAWSDB_URL);
-} else {
-    // Database is local
-    connection = mysql.createConnection({
-        port: 3306,
-        host: 'localhost',
-        user: 'root',
-        password: 'process.env.DB_PASSWORD',
-        database: 'process.env.DB_NAME'
-    })
-};
+// var connection;
+// if (process.env.JAWSDB_URL) {
+//     // Database is JawsDB on Heroku
+//     connection = mysql.createConnection(process.env.JAWSDB_URL);
+// } else {
+//     // Database is local
+//     connection = mysql.createConnection({
+//         port: 3306,
+//         host: 'localhost',
+//         user: 'root',
+//         password: 'process.env.DB_PASSWORD',
+//         database: 'process.env.DB_NAME'
+//     })
+// };
 
 
 
