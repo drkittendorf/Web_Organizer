@@ -1,5 +1,5 @@
-// require('dotenv').config()
-// var mysql = require('mysql');
+require('dotenv').config()
+var mysql = require('mysql');
 
 module.exports = {
     development: {
