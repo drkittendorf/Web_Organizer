@@ -2,34 +2,27 @@ const db = require('../models');
 const { query } = require('express');
 
 module.exports = function(app) {
-//* GET route for getting all of the bookmarks for the logged in User
-    app.get('/api/user_data/', function(req, res) {
-        const userBookmarks = (req.user.id);
-        console.log(req.user.id);
-        console.log(req);
-            
-        db.Bookmark.findAll({
+    //* GET route for getting all of the bookmarks
+        app.get('/api/bookmark', function(req, res) {
+            console.log('begiing of object',req)
+            const testKey = Object.keys(req.sessionStore.sessions)[0]
+            const testVals = Object.values(req.sessionStore.sessions)[0]
+            const testObj = JSON.parse(testVals);
+            // console.log(`testVals: ${testVals}`)
+            // console.log('line12',testObj.passport.user.id)
+            if (req.query.user_id) {
+            query.UserId = req.query.user_id;
+            }
+            db.Bookmark.findAll({
             where: {
-              UserId: userBookmarks
-             },
-            }).then(function(dbBookmark) {  
-                res.json(dbBookmark);
-                });
+                UserId: testObj.passport.user.id
+            },
+            include: [db.User]
+            }).then(function(dbBookmark) {
+            // console.log("Bookmark response line 22", db.Bookmark)    
+            res.json(dbBookmark);
             });
-        // console.log('beginning of object',req)
-        // const testKey = Object.keys(req.sessionStore.sessions)[0]
-        // const testVals = Object.values(req.sessionStore.sessions)[0]
-        // const testObj = JSON.parse(testVals);
-        // console.log(`testVals: ${testVals}`)
-        // console.log('line12',testObj.passport.user.id)
-        // var query = {};
-        // if (req.query.user_id) {
-        // query.UserId = req.query.user_id;
-        // }
-        //console.log(req.session.passport.user.id);
-        
-    
-
+        });
     //* Get route for retrieving a single bookmark
     app.get('/api/bookmark/:id', function(req, res) {
         // Here we add an "include" property to our options in our findOne query
