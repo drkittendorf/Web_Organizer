@@ -32,7 +32,7 @@ app.use(express.json());
 // but not modified. Choosing false is useful for implementing login sessions, reducing server storage usage, 
 // or complying with laws that require permission before setting a cookie. Choosing false will also help with 
 // race conditions where a client makes multiple parallel requests without a session. 
-app.use(session({ secret: "keyboard cat", resave: true, saveUninitialized: false, unset: 'destroy', }));
+app.use(session({ secret: "keyboard cat", resave: true, saveUninitialized: false, unset: 'destroy' }));
 
 
 app.use(passport.initialize());

@@ -1,5 +1,3 @@
-// copied wholesale from homework
-
 let passport = require('passport');
 let LocalStrategy = require('passport-local').Strategy;
 let db = require('../models');
@@ -43,7 +41,7 @@ passport.serializeUser(function(user, cb) {
 });
 
 passport.deserializeUser(function(obj, cb) {
-  cb(null, obj);
+    cb(null, obj);
 });
 
 // Exporting our configured passport

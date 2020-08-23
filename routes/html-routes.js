@@ -16,7 +16,7 @@ module.exports = function(app) {
         res.render('login');
     });
 
-    // Signup Route: Sign Up Page for Users to create an account
+    // Login Route: Sign Up Page for Users to create an account
     app.get('/login', function(req, res){
        if (req.user){
         res.redirect('/members');

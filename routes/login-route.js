@@ -4,8 +4,21 @@ const passport = require("../config/passport");
 
 module.exports = function(app) {
 
-app.post("/api/login", passport.authenticate("local"), function(req, res) {
-    res.json(req.user);
+    app.post("/api/login", passport.authenticate("local"), function(req, res) {
+        res.json({
+        email: req.user.email,
+        id: req.user.id
+    });
+    // res.json(req.user);
+    // console.log("line 9 login-route",req.user)
+        // .then( function(req, res) {
+        //        res.json({
+        //         email: req.user.email,
+        //         id: req.user.id
+        //     });
+        
+        // });
+    
   });
 
   app.post("/api/signup", function(req, res) {

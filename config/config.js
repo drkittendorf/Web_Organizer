@@ -1,7 +1,6 @@
 const mysql = require('mysql');
 require('dotenv').config()
 
-
 if (process.env.JAWSDB_URL) {
     // Database is JawsDB on Heroku
     connection = mysql.createConnection(process.env.JAWSDB_URL);
@@ -15,7 +14,6 @@ if (process.env.JAWSDB_URL) {
         database: process.env.DB_NAME
     })
 };
-
 module.exports = {
     development: {
       username: 'root',
@@ -30,7 +28,6 @@ module.exports = {
         "dialect":  "mysql"
   }
 }
-
 
 connection.connect();
 
