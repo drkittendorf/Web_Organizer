@@ -3,27 +3,30 @@ const { query } = require('express');
 
 module.exports = function(app) {
     //* GET route for getting all of the bookmarks
-        app.get('/api/bookmark', function(req, res) {
-            console.log('begiing of object',req)
-            const testKey = Object.keys(req.sessionStore.sessions)[0]
-            const testVals = Object.values(req.sessionStore.sessions)[0]
-            const testObj = JSON.parse(testVals);
-            // console.log(`testVals: ${testVals}`)
-            // console.log('line12',testObj.passport.user.id)
-            if (req.query.user_id) {
-            query.UserId = req.query.user_id;
-            }
-            db.Bookmark.findAll({
-            where: {
-                UserId: testObj.passport.user.id
-            },
-            include: [db.User]
-            }).then(function(dbBookmark) {
-            // console.log("Bookmark response line 22", db.Bookmark)    
-            res.json(dbBookmark);
-            });
+    app.get('/api/bookmark', function(req, res) {
+        
+        const testKey = Object.keys(req.sessionStore.sessions)[0]
+        const testVals = Object.values(req.sessionStore.sessions)[0]
+        const testObj = JSON.parse(testVals);
+        // console.log(`testVals: ${testVals}`)
+        // console.log('line12',testObj.passport.user.id)
+        
+        if (req.query.user_id) {
+        query.UserId = req.query.user_id;
+        }
+        
+        db.Bookmark.findAll({
+        where: {
+            UserId: testObj.passport.user.id
+        },
+        include: [db.User]
+        }).then(function(dbBookmark) {
+        // console.log("Bookmark response line 22", db.Bookmark)    
+        res.json(dbBookmark);
         });
-    //* Get route for retrieving a single bookmark
+    });
+
+    //* Get route for retrieving a single post-- NOT USING
     app.get('/api/bookmark/:id', function(req, res) {
         // Here we add an "include" property to our options in our findOne query
         // We set the value to an array of the models we want to include in a left outer join
@@ -38,12 +41,15 @@ module.exports = function(app) {
         });
     });
     
+    //* GET rout to get all bookmarks within a specific category.
     app.get('/api/bookmark/:category', function(req, res) {
-        db.Bookmark.findOne({
+        console.log(res)
+        console.log('THIS IS IT', req.params.category)
+        db.Bookmark.findAll({
             where: {
                 category: req.params.category
             }, 
-            include: [db.User]
+            // include: [db.User]
         }).then(function(dbCategory) {
             res.json(dbCategory)
         });
