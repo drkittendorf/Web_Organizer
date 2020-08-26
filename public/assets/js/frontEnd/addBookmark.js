@@ -68,25 +68,29 @@ $(document).ready(function() {
     });
 
     // $(('.bookmarkCategory').on('click',  () => {
-    $(document).on('click', '.bookmarkCategory', function(){
+    $(document).on('click', '.bookmarkCategory', function(e){
       //when we click the category, we want to view only that category.
       event.preventDefault();
-  
-      let category = $(this).attr("data-id")
-
-      console.log(category)
-
-      // Send the POST request.
-      $.ajax('/api/bookmark/' + category, {
-        type: 'GET',
-        data: category
-      }).then(
-        function() {
-        //   console.log('you are viewing', category);
+        console.log(e)
+    //   let category = $(this).attr("data-id")
+    //   console.log("category is", category)
+    // Send the POST request.+ category, {
+      return $.ajax({
+          url:'/api/bookmark/', 
+        method: 'GET'
+        // data: category
+      }).then(function(data) {
+          console.log(data);
           // Reload the page to get the updated list
-          window.location.replace('/category');
+          window.location.replace('/categories');
           // return data.json
-        }
-      );
-    });
+        const filtered = data.filter(item => item.category === e.target.outerText)
+        console.log(filtered)
+        return $.ajax({
+            url: '/members',
+            method: 'GET',
+            data: { filtered }
+        })
+      })
+    })
 });

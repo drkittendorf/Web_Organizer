@@ -5,21 +5,21 @@ module.exports = function(app) {
     //* GET route for getting all of the bookmarks
     app.get('/api/bookmark', function(req, res) {
         
-        const testKey = Object.keys(req.sessionStore.sessions)[0]
-        const testVals = Object.values(req.sessionStore.sessions)[0]
-        const testObj = JSON.parse(testVals);
+        // const testKey = Object.keys(req.sessionStore.sessions)[0]
+        // const testVals = Object.values(req.sessionStore.sessions)[0]
+        // const testObj = JSON.parse(testVals);
         // console.log(`testVals: ${testVals}`)
         // console.log('line12',testObj.passport.user.id)
         
-        if (req.query.user_id) {
-        query.UserId = req.query.user_id;
-        }
-        
+        if (req.query.user_id) {}
+
+
         db.Bookmark.findAll({
-        where: {
-            UserId: testObj.passport.user.id
-        },
-        include: [db.User]
+            include: [db.User]
+        // where: {
+        //     UserId: testObj.passport.user.id
+        // },
+      
         }).then(function(dbBookmark) {
         // console.log("Bookmark response line 22", db.Bookmark)    
         res.json(dbBookmark);
@@ -42,17 +42,19 @@ module.exports = function(app) {
     });
     
     //* GET rout to get all bookmarks within a specific category.
-    app.get('/api/bookmark/:category', function(req, res) {
-        console.log(res)
-        console.log('THIS IS IT', req.params.category)
+    app.get('/api/category', function(req, res) {
+        console.log("PARAMS", req.params)
+        // console.log("this is the request", req)
+        // console.log('THIS IS IT', req.params.category)
+      
         db.Bookmark.findAll({
             where: {
                 category: req.params.category
-            }, 
-            // include: [db.User]
+            }
+            
         }).then(function(dbCategory) {
             res.json(dbCategory)
-        });
+          });
     });
     
 

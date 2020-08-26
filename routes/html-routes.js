@@ -26,17 +26,15 @@ module.exports = function (app) {
 	// Users Route: Page a signed in user will view
 
 	app.get('/members', function (req, res) {
-		const testKey = Object.keys(req.sessionStore.sessions)[0];
-		const testVals = Object.values(req.sessionStore.sessions)[0];
-		const testObj = JSON.parse(testVals);
-		// console.log(`testVals: ${testVals}`)
-		// console.log('line12',testObj.passport.user.id)
-
+		// const testKey = Object.keys(req.sessionStore.sessions)[0];
+		// const testVals = Object.values(req.sessionStore.sessions)[0];
+		// const testObj = JSON.parse(testVals);
+		
 		db.Bookmark.findAll({
-			where: {
-				UserId: testObj.passport.user.id,
-			},
-			include: [db.User],
+            include: [db.User]
+			// where: {
+			// 	UserId: testObj.passport.user.id,
+			// },
 		})
 			.then((response) => {
 				// console.log(response)
